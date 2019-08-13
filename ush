@@ -1,0 +1,12 @@
+#/!bin/bash
+webroot="/var/www/yourconfig"  # you need to edit this
+baseurl="example.com" # this, too
+
+echo $1 >> $HOME/ushcount
+
+currentnumber=$(wc -l ~/ushcount | cut -d " " -f1)
+hex=$(printf '%x' $currentnumber)
+
+mkdir "$webroot/$hex"
+echo "<!DOCTYPE html><meta http-equiv=\"refresh\" content=\"0; url=$1\">" > "$webroot/$hex/index.html"
+echo "$baseurl/$hex"
